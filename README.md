@@ -1,5 +1,5 @@
 # serialization-benchmarks
-Some simple experiments on encoding binary data with libbson or Rapidjson in C(++)
+Some simple experiments on encoding binary data with libbson and Rapidjson in C(++).
 
 Output from the main executable:
 ```
@@ -24,3 +24,6 @@ This is a cmake based project. Create a build/ folder and call 'cmake .. && make
 Please note that libbson has been configured and put into this project directly. 
 This comes at cost: The configuration in bson-config.h might not be suitable for your machine.
 It's recommended to configure & install libbson as a library when using it.
+
+The choosen methods to encode data might not be perfect.
+Comments on that are highly encouraged.
