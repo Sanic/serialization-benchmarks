@@ -1,10 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(PROJECT_NAME rosbridge2cpp)
+set(PROJECT_NAME serializationtests)
 project(${PROJECT_NAME})
 
 set(CMAKE_CXX_FLAGS "-g -Wall")
-#add_definitions(-std=c++11)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 add_definitions(-DRAPIDJSON_HAS_STDSTRING=1)
 add_definitions(-DBSON_COMPILATION)
@@ -52,11 +51,3 @@ ADD_EXECUTABLE( tests
 	${SOURCES}
 )
 
-#ADD_LIBRARY( rosbridge2cpp SHARED
-#	src/client/socket_tcp_connection.cpp 
-#	src/ros_bridge.cpp 
-#	src/ros_topic.cpp 
-#	src/ros_service.cpp 
-#	src/ros_tf_broadcaster.cpp 
-#	src/ros_time.cpp 
-#)

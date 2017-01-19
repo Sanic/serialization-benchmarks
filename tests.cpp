@@ -107,9 +107,8 @@ int main(int argc, const char* argv[] ){
     BSON_APPEND_INT32 (&b, "a", 1);
     BSON_APPEND_UTF8 (&b, "hello", "world");
     BSON_APPEND_BOOL (&b, "bool", true);
+    std::string str = bson_as_json (&b, NULL);
     double t = tmr.elapsed();
-    // std::string str = bson_as_json (&b, NULL);
-    // std::cout << "BSON Basic (ws: " << b.len << ")("<< t<< "): " << str << std::endl;
     cout_experiments("BSON Basic", b.len, t);
   }
 
@@ -126,7 +125,6 @@ int main(int argc, const char* argv[] ){
     r.Accept(writer);
     std::string x = buffer.GetString();
     double t = tmr.elapsed();
-    // std::cout << "RapidJSON basic (ws: "<< x.length() <<")("<< t<< "): " << x << std::endl;
     cout_experiments("RapidJSON basic", x.length(), t);
   }
 
@@ -138,7 +136,6 @@ int main(int argc, const char* argv[] ){
     bson_append_binary(&b, "binary_data", -1, BSON_SUBTYPE_BINARY, (uint8_t* ) fakedata, fakedata_size);
     double t = tmr.elapsed();
     std::string str = bson_as_json (&b, NULL);
-    // std::cout << "BSON Binary "<< std::setfill(' ') << std::setw(30) << "(ws: " << b.len << ")("<< t<< "): " << std::left << std::endl;
     cout_experiments("BSON Binary", b.len, t);
   }
 
@@ -154,7 +151,6 @@ int main(int argc, const char* argv[] ){
     r.Accept(writer);
     std::string x = buffer.GetString();
     double t = tmr.elapsed();
-    // std::cout << "RapidJson 'Binary' (ws: "<< x.length() <<")("<< t<< "): " << std::endl;
     cout_experiments("RapidJson Binary", x.length(), t);
   }
 
@@ -165,13 +161,11 @@ int main(int argc, const char* argv[] ){
     r.AddMember("hello", "world", alloc);
     std::string base64_data = base64_encode(((const BYTE*) &fakedata), fakedata_size);
     r.AddMember("binary_data", base64_data, alloc);
-    // r["binary_data"].SetString(fakedata, fakedata_size, alloc);
     rapidjson::StringBuffer buffer;
     rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
     r.Accept(writer);
     std::string x = buffer.GetString();
     double t = tmr.elapsed();
-    // std::cout << "RapidJson + base64_encode(binary) (ws: "<< x.length() <<")("<< t<< "): " << std::endl;
     cout_experiments("RapidJson + base64_encode(binary)", x.length(), t);
   }
 
